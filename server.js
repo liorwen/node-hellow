@@ -4,7 +4,7 @@ const express = require('express'),
 const ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 app.get('/',function (req, res) {
-    res.send('Hello world' + new Date());
+    res.sendFile('index.html');
 });
 
 app.listen(8080, ip);
