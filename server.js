@@ -3,9 +3,9 @@ const express = require('express'),
     path = require('path'),
     app = express();
 const ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
-
+app.use(express.static(__dirname + '/build'));
 app.get('/',function (req, res) {
-    res.sendFile(path.join(__dirname+'/index.html'));
+    res.sendFile('index.html');
 });
 
 app.listen(8080, ip);

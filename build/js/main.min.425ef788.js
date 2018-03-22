@@ -1,0 +1,1 @@
+"use strict";!function(){var h='<article class="col-md-3">\n                <h3>中文能不能</h3>\n                <p>測試中文</p>\n                <a href="/blog-content/1">read more</a>\n            </article>',s=[];s.push(h),s.push(h),s.push(h),s.push(h),s.push(h),s.push(h),$("#home-blog").html(s.join(""))}();
