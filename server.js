@@ -1,13 +1,24 @@
-const express = require('express'),
-    fs = require('fs'),
-    path = require('path'),
-    app = express();
-const ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
-app.use(express.static(__dirname + '/build'));
-app.get('/',function (req, res) {
-    res.sendFile('index.html');
-});
-
-app.listen(8080, ip);
-
-module.exports = app;
+const Vue = require('vue')
+const server = require('express')()
+const renderer = require('vue-server-renderer').createRenderer({
+    template: require('fs').readFileSync('./index.template.html', 'utf-8')
+})
+server.get('*', (req, res) => {
+    const app = new Vue({
+        data: {
+            url: req.url
+        },
+        template: `<div>访问的 URL 是： {{ url }}</div>`
+    })
+    const context = {
+        title: 'hello-world',
+    }
+    renderer.renderToString(app, context, (err, html) => {
+        if (err) {
+            res.status(500).end('Internal Server Error')
+            return
+        }
+        res.end(html);
+    })
+})
+server.listen(8080)
