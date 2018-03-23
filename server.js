@@ -8,7 +8,9 @@ server.get('*', (req, res) => {
         data: {
             url: req.url
         },
-        template: `<div>访问的 URL 是： {{ url }}</div>`
+        template: `    <div>访问的 URL 是： {{ url }}</div>
+                       <img src="img/bg.jpg" alt="風景照">
+                `
     })
     const context = {
         title: 'hello-world',
